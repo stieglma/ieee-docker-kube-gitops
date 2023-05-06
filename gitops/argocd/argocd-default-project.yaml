@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: default
+  namespace: argocd
+spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: ClusterRoleBinding
+  - group: '*'
+    kind: ClusterRole
+  - group: '*'
+    kind: CustomResourceDefinition
+  - group: '*'
+    kind: ClusterIssuer
+  - group: '*'
+    kind: MutatingWebhookConfiguration
+  - group: '*'
+    kind: ValidatingWebhookConfiguration
+  - group: '*'
+    kind: Namespace
+  - group: policy
+    kind: PodSecurityPolicy
+  - group: 'storage.k8s.io'
+    kind: StorageClass
+  - group: '*'
+    kind: PersistentVolume
+  - group: 'networking.k8s.io'
+    kind: IngressClass
+  - group: 'apiregistration.k8s.io'
+    kind: APIService
+  description: Default Project
+  destinations:
+  - namespace: '*'
+    server: '*'
+  sourceRepos:
+  - git@github.com:stieglma/ieee-docker-kube-gitops.git

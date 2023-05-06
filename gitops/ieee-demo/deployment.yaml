@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: slides
+  name: slides
+  namespace: ieee-gitops-demo
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: slides
+  template:
+    metadata:
+      labels:
+        app: slides
+    spec:
+      containers:
+      - image: ieee-demo-slides:latest
+        imagePullPolicy: Never
+        name: ieee-talk-slides
+        ports:
+        - containerPort: 8080
+          protocol: TCP

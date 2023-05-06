@@ -1,0 +1,28 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect-to-slides
+  namespace: ieee-demo
+spec:
+  redirectRegex:
+    regex: ^http://slides-manual.localhost/?$$
+    replacement: http://slides-manual.localhost/slides.md
+
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: slides-route
+  namespace: ieee-demo
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`slides-manual.localhost`)
+      kind: Rule
+      middlewares:
+        - name: redirect-to-slides
+      services:
+        - name: slides
+          port: 8080

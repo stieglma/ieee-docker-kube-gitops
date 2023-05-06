@@ -1,0 +1,28 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect-to-slides
+  namespace: ieee-gitops-demo
+spec:
+  redirectRegex:
+    regex: ^http://slides-gitops.localhost/?$$
+    replacement: http://slides-gitops.localhost/slides.md
+
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: slides-route
+  namespace: ieee-gitops-demo
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`slides-gitops.localhost`)
+      kind: Rule
+      middlewares:
+        - name: redirect-to-slides
+      services:
+        - name: slides
+          port: 8080

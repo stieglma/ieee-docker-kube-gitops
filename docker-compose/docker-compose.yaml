@@ -1,0 +1,34 @@
+version: '2'
+services:
+  slides:
+    image: ieee-demo-slides:latest
+    restart: unless-stopped
+    # not necessary, but here for showcasing
+    ports:
+      - "8082:8080"
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.slides.loadbalancer.server.port=8080
+      - traefik.http.routers.slides.rule=Host(`slides.localhost`)
+      - traefik.http.routers.slides.service=slides
+      - traefik.docker.network=webproxy
+      - traefik.http.routers.slides.middlewares=add-slides
+      - traefik.http.middlewares.add-slides.redirectregex.regex=^http://([^/]+)/?$$
+      - traefik.http.middlewares.add-slides.redirectregex.replacement=http://$$1/slides.md
+    networks:
+      - webproxy
+
+  proxy:
+    image: traefik:v3.0
+    restart: unless-stopped
+    ports:
+      - "8081:80"
+      - "8080:8080"
+    volumes:
+      - ./traefik.toml:/traefik.toml
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - webproxy
+
+networks:
+  webproxy:
