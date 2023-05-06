@@ -11,7 +11,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: traefik-dashboard
+    path: gitops/traefik-dashboard
     repoURL:  git@github.com:stieglma/ieee-docker-kube-gitops.git
     targetRevision: main
   syncPolicy:

@@ -11,7 +11,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: argocd
+    path: gitops/argocd
     repoURL:  git@github.com:stieglma/ieee-docker-kube-gitops.git
     targetRevision: main
   syncPolicy:
