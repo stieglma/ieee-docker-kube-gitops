@@ -12,7 +12,7 @@ spec:
   project: default
   source:
     path: gitops/ieee-demo
-    repoURL:  git@github.com:stieglma/ieee-docker-kube-gitops.git
+    repoURL: https://github.com/stieglma/ieee-docker-kube-gitops.git
     targetRevision: main
   syncPolicy:
     automated:

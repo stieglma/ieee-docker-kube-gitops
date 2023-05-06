@@ -34,4 +34,4 @@ spec:
   - namespace: '*'
     server: '*'
   sourceRepos:
-  - git@github.com:stieglma/ieee-docker-kube-gitops.git
+  - https://github.com/stieglma/ieee-docker-kube-gitops.git
