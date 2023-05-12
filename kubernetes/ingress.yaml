@@ -2,7 +2,7 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: redirect-to-slides
-  namespace: ieee-demo
+  namespace: ieee-manual-demo
 spec:
   redirectRegex:
     regex: ^http://slides-manual.localhost/?$$
@@ -14,7 +14,7 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: slides-route
-  namespace: ieee-demo
+  namespace: ieee-manual-demo
 spec:
   entryPoints:
     - web
